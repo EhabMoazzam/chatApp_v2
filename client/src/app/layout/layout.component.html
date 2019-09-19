@@ -1,0 +1,71 @@
+<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+  
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" routerLink="/dashboard" routerLinkActive="active">
+      <div class="sidebar-brand-icon rotate-n-15">
+        <i class="fas fa-laugh-wink"></i>
+      </div>
+      <div class="sidebar-brand-text mx-3">ChAT APP</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item"> <!-- active -->
+      <a class="nav-link" routerLink="/dashboard" routerLinkActive="active">
+        <i class="fas fa-fw fa-tachometer-alt"></i>
+        <span>Dashboard</span></a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      Interface
+    </div>
+
+    <!-- Nav Item - Pages Collapse Menu -->
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/chat" routerLinkActive="active">
+        <i class="fas fa-comments"></i>
+        <span>Chat Room</span>
+      </a>
+    </li>
+    <li class="nav-item" *ngIf="userData.role<=3">
+      <a class="nav-link" routerLink="/users" routerLinkActive="active">
+        <i class="fas fa-users"></i>
+        <span>Users</span>
+      </a>
+    </li>
+
+    <!-- Nav Item - Utilities Collapse Menu -->
+    <li class="nav-item" *ngIf="userData.role<4">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
+        <i class="fas fa-fw fa-cog"></i>
+        <span>Features</span>
+      </a>
+      <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <h6 class="collapse-header">Additional Features:</h6>
+          <a *ngIf="userData.role==1" class="collapse-item" routerLink="/super-admin" routerLinkActive="active">Super Admin</a>
+          <a *ngIf="userData.role<=1" class="collapse-item" routerLink="/group-admin" routerLinkActive="active">Group Admin</a>
+          <a *ngIf="userData.role<=2" class="collapse-item" routerLink="/group-assis" routerLinkActive="active">Group Assis</a>
+          <hr class="sidebar-divider">
+          <a *ngIf="userData.role<=2" class="collapse-item" routerLink="/group" routerLinkActive="active">Create Group & Sub</a>
+          <a *ngIf="userData.role<=3" class="collapse-item" routerLink="/channel" routerLinkActive="active">Create Channel</a>
+        </div>
+      </div>
+    </li>
+
+    <hr class="sidebar-divider">
+
+    <li class="nav-item">
+      <a class="nav-link" routerLink="/login" routerLinkActive="active" data-toggle="modal" data-target="#logoutModal">
+        <i class="fas fa-sign-out-alt"></i>
+        <span>Log out</span>
+      </a>
+    </li>
+
+  </ul>
