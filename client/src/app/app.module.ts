@@ -12,6 +12,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LayoutModule } from './layout/layout.module'
 import { NavibarModule } from './navibar/navibar.module'
 
+// Services
+import { SocketService } from './services/socket.service'
+
 // Component
 import { ChatComponent } from './chat/chat.component';
 import { SuperAdminComponent } from './super-admin/super-admin.component';
@@ -44,7 +47,7 @@ import { UsersComponent } from './users/users.component';
     LayoutModule,
     NavibarModule
   ],
-  providers: [],
+  providers: [SocketService],
   bootstrap: [AppComponent]
 })
 
