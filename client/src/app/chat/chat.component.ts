@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Pipe, PipeTransform } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { SocketService } from '../services/socket.service';
@@ -8,7 +8,7 @@ declare var $: any;
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.css']
+  styleUrls: ['./chat.component.css'],
 })
 
 export class ChatComponent implements OnInit {
@@ -185,26 +185,29 @@ export class ChatComponent implements OnInit {
       msg : this.message
     })  // Send message into socket server
 
-    this.message = ""
-    this.http.post('http://localhost:3000/api/v1/chat/history', "_id=" + this.selected_channel_id, {
-      headers: headers
-    }).subscribe(async(data : any) => {
-      for (var i =0; i < data.length ; i++){
-        var chat_item = data[i]
+    setTimeout(function(){ 
+      this.http.post('http://localhost:3000/api/v1/chat/history', "_id=" + this.selected_channel_id, {
+        headers: headers
+      }).subscribe(async(data : any) => {
+        for (var i =0; i < data.length ; i++){
+          var chat_item = data[i]
 
-        if (chat_item.from_id !== sessionStorage.getItem('_id')){
-          var result : any = await this.getUserImageInfoByID(chat_item.from_id) 
-          chat_item.avator_url = result.avator_url
-          chat_item.name = result.name
+          if (chat_item.from_id !== sessionStorage.getItem('_id')){
+            var result : any = await this.getUserImageInfoByID(chat_item.from_id) 
+            chat_item.avator_url = result.avator_url
+            chat_item.name = result.name
 
-          data[i] = chat_item
+            data[i] = chat_item
+          }
         }
-      }
-      this.chatList = data
+        this.chatList = data
 
-      this.makeScrollDown() // Scroll Down in ChatBox
-      console.log("Chat List => ", this.chatList)
-    })
+        this.makeScrollDown() // Scroll Down in ChatBox
+        console.log("Chat List => ", this.chatList)
+      })
+    }, 200); 
+
+    this.message = ""
   }
 
   initIOConnection(){

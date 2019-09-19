@@ -1,0 +1,55 @@
+{ 
+    "_id" : ObjectId("5d82926f8ed9a911087adcaa"), 
+    "name" : "Test Super Admin", 
+    "email" : "test1@gmail.com", 
+    "password" : "test1", 
+    "role" : NumberInt(1), 
+    "group_id" : "5d82ad71a4d165378c7681de", 
+    "channel_id" : "5d82b35c32621644b8034f07", 
+    "avator_url" : "http://localhost:3000/images/photo1.jpg", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5d82a512be62f937fcbc6878"), 
+    "name" : "Test Admin", 
+    "email" : "test2@gmail.com", 
+    "password" : "test2", 
+    "role" : NumberInt(2), 
+    "group_id" : "5d82ad71a4d165378c7681de", 
+    "channel_id" : "5d82b35c32621644b8034f07", 
+    "avator_url" : "http://localhost:3000/images/photo2.png", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5d82a517be62f937fcbc6879"), 
+    "name" : "Test Assis", 
+    "email" : "test3@gmail.com", 
+    "password" : "test3", 
+    "role" : NumberInt(3), 
+    "group_id" : "5d82ad71a4d165378c7681de", 
+    "channel_id" : "5d82b35c32621644b8034f07", 
+    "avator_url" : "http://localhost:3000/images/photo3.jpg", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5d82a51bbe62f937fcbc687a"), 
+    "name" : "Test User 1", 
+    "email" : "test4@gmail.com", 
+    "password" : "test4", 
+    "role" : NumberInt(4), 
+    "group_id" : "5d82ad71a4d165378c7681de", 
+    "channel_id" : "5d82b35c32621644b8034f07", 
+    "avator_url" : "http://localhost:3000/images/avatar.png", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5d82c0538a0d312d447f7001"), 
+    "name" : "Test User 2", 
+    "email" : "test6@gmail.com", 
+    "password" : "test6", 
+    "role" : NumberInt(4), 
+    "group_id" : "5d82ad71a4d165378c7681de", 
+    "channel_id" : "5d82b35c32621644b8034f07", 
+    "avator_url" : "http://localhost:3000/images/avatar.png", 
+    "__v" : NumberInt(0)
+}

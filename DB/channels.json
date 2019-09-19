@@ -1,0 +1,12 @@
+{ 
+    "_id" : ObjectId("5d82b35c32621644b8034f07"), 
+    "name" : "Default Channel", 
+    "group_id" : "5d82ad71a4d165378c7681de", 
+    "__v" : NumberInt(0)
+}
+{ 
+    "_id" : ObjectId("5d8383eea324c153d4e6000d"), 
+    "name" : "Angular Channel", 
+    "group_id" : "5d82d1ae8a0d312d447f7007", 
+    "__v" : NumberInt(0)
+}

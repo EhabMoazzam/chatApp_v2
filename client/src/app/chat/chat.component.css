@@ -11847,8 +11847,9 @@
 }
 .msg_time_send{
     position: absolute;
-    right:15px;
+    right: 15px;
     bottom: -18px;
+    width: 100px;
     color: rgba(255,255,255,0.5);
     font-size: 10px;
 }

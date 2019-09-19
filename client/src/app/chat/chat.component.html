@@ -77,12 +77,12 @@
 								</div>
 								<div class="msg_cotainer" *ngIf="chat.from_id==userData._id">
 									{{chat.message}}
-									<span class="msg_time">8:40 AM, Today</span>
+									<span class="msg_time">{{chat.send_at | momentPipe : 'YYYY-MM-DD HH:mm:ss'}}</span>
 								</div>
 								
 								<div class="msg_cotainer_send" *ngIf="chat.from_id!=userData._id">
 									{{chat.message}}
-									<span class="msg_time_send">8:40 AM, Today</span>
+									<span class="msg_time_send">{{chat.send_at | momentPipe : 'YYYY-MM-DD HH:mm:ss'}}</span>
 								</div>
 								<div class="img_cont_msg" *ngIf="chat.from_id!=userData._id">
 									<img src="{{chat.avator_url}}" class="rounded-circle user_img_msg">

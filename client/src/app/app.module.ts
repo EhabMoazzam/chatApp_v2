@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Pipe, PipeTransform  } from '@angular/core';
 import { FormsModule  } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
@@ -23,8 +23,19 @@ import { GroupAssisComponent } from './group-assis/group-assis.component';
 import { GroupComponent } from './group/group.component';
 import { ChannelComponent } from './channel/channel.component';
 import { UsersComponent } from './users/users.component';
+import * as moment from 'moment';
 
+@Pipe({
+  name: 'momentPipe'
+})
 
+export class MomentPipe implements PipeTransform {
+  transform(value: any, ...args: any[]): any {
+      let [format] = args;
+      
+      return moment(new Date(value*1)).format(format);
+  }
+}
 
 @NgModule({
   declarations: [
@@ -38,6 +49,7 @@ import { UsersComponent } from './users/users.component';
     GroupComponent,
     ChannelComponent,
     UsersComponent,
+    MomentPipe
   ],
   imports: [
     BrowserModule,
