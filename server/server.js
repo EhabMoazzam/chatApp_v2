@@ -2,6 +2,11 @@ var express = require('express')
 var bodyParser = require('body-parser')
 var app = express()
 var http = require('http').Server(app)
+const io = require('socket.io')(http)
+const sockets = require('./socket/socket')
+const server = require('./socket/listen') 
+
+const PORT = 3000 // Socket Port
 
 // DB CONNECTION
 require('./config/db_config');
@@ -23,11 +28,6 @@ app.all('/*' ,function(req, res, next) {
 var main = require('./route/router')
 app.use('/api/v1', main)
 
-// Server URL
-let server = http.listen(3000, function(){
-    let host = server.address().address
-    let port = server.address().port
+sockets.connect(io, PORT)
+server.listen(http, PORT)
 
-    console.log("Server listening on : " + host + " port : " + port)
-
-})
