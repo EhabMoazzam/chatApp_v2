@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+declare var $: any;
 
 @Component({
   selector: 'app-chat',
@@ -9,7 +13,7 @@ export class ChatComponent implements OnInit {
 
   userData : any
   
-  constructor() { }
+  constructor(private _router: Router, private http: HttpClient) { }
 
   ngOnInit() {
     this.userData = {

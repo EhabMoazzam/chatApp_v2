@@ -6,6 +6,7 @@ var router = express.Router()
 var _auth = require('./auth_router')
 var _group = require('./group_router')
 var _channel = require('./channel_router')
+var _chat = require('./chat_router')
 
 // Routers - User
 router.post('/auth', _auth.auth)
@@ -29,5 +30,9 @@ router.post('/channel/delete', _channel.delete)
 router.post('/channel/get', _channel.get)
 router.post('/channel/get_all', _channel.get_all)
 router.post('/channel/get_groups_by_id', _channel.getGroupByID)
+
+// Routers - Chat
+router.post('/chat/send', _chat.send)
+router.post('/chat/history', _chat.getAllChatHistoryById)
 
 module.exports = router
