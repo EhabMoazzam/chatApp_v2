@@ -11820,7 +11820,7 @@
 .msg_cotainer{
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 10px;
+    margin-left: 20px;
     border-radius: 25px;
     background-color: #82ccdd;
     padding: 10px;
@@ -11839,15 +11839,16 @@
 }
 .msg_time{
     position: absolute;
-    left: 0;
-    bottom: -15px;
+    left: 15px;
+    bottom: -18px;
+    width: 100px;
     color: rgba(255,255,255,0.5);
     font-size: 10px;
 }
 .msg_time_send{
     position: absolute;
-    right:0;
-    bottom: -15px;
+    right:15px;
+    bottom: -18px;
     color: rgba(255,255,255,0.5);
     font-size: 10px;
 }

@@ -23,13 +23,18 @@ module.exports.getAllChatHistoryById = function(req, res){
     ChatSchema.find({}, function (err, docs){
         if (err) res.status(401).json(err)
 
-        for (var i = 0; i < docs.length; i++){
-            var doc = docs[i]
-
-            if (doc.from_id === req.body._id || doc.to_id === req.body._id) data.push(doc)
-        }
-
-        res.status(201).json(data);
+        if (req.body._id === "-1"){
+            res.status(201).json(docs);
+        }else{
+            for (var i = 0; i < docs.length; i++){
+                var doc = docs[i]
+                
+                // to_id is channel id
+                if (doc.to_id === req.body._id) data.push(doc)
+            }
+    
+            res.status(201).json(data);
+        }        
     })
 
 }

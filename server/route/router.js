@@ -29,7 +29,8 @@ router.post('/channel/update', _channel.update)
 router.post('/channel/delete', _channel.delete)
 router.post('/channel/get', _channel.get)
 router.post('/channel/get_all', _channel.get_all)
-router.post('/channel/get_groups_by_id', _channel.getGroupByID)
+router.post('/channel/get_group', _channel.getGroupByID)
+router.post('/channel/get_groups_by_id', _channel.get_all_by_groupID)
 
 // Routers - Chat
 router.post('/chat/send', _chat.send)

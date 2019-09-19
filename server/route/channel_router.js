@@ -49,6 +49,14 @@ module.exports.get = function(req, res){
     })
 }
 
+module.exports.get_all_by_groupID = function(req, res){
+    ChannelSchema.findOne({'group_id' : req.body._id}, function (err, doc){
+        if (err) res.status(401).json(err)
+
+        res.status(201).json(doc)
+    })
+}
+
 module.exports.get_all = function(req, res){
     var data = []
 
