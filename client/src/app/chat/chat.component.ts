@@ -10,6 +10,7 @@ declare var $: any;
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
+
 export class ChatComponent implements OnInit {
 
   userData              : any
@@ -55,11 +56,23 @@ export class ChatComponent implements OnInit {
 
           this.http.post('http://localhost:3000/api/v1/chat/history', "_id=" + this.selected_channel_id, {
             headers: headers
-          }).subscribe((data : any) => {
-            // console.log("Chat Histories => ", data)
-            this.chatList = data
-          })
+          }).subscribe(async (data : any) => {
+            for (var i =0; i < data.length ; i++){
+              var chat_item = data[i]
 
+              if (chat_item.from_id !== sessionStorage.getItem('_id')){
+                var result : any = await this.getUserImageInfoByID(chat_item.from_id) 
+                chat_item.avator_url = result.avator_url
+                chat_item.name = result.name
+
+                data[i] = chat_item
+              }
+            }
+            this.chatList = data
+
+            this.makeScrollDown() // Scroll Down in ChatBox
+            console.log("Chat List => ", this.chatList)
+          })
         }
         // console.log(channel_IDs)
       }else{
@@ -77,9 +90,22 @@ export class ChatComponent implements OnInit {
 
             this.http.post('http://localhost:3000/api/v1/chat/history', "_id=" + this.selected_channel_id, {
               headers: headers
-            }).subscribe((data : any) => {
-              // console.log("Chat Histories => ", data)
+            }).subscribe(async (data : any) => {
+              for (var i =0; i < data.length ; i++){
+                var chat_item = data[i]
+  
+                if (chat_item.from_id !== sessionStorage.getItem('_id')){
+                  var result : any = await this.getUserImageInfoByID(chat_item.from_id) 
+                  chat_item.avator_url = result.avator_url
+                  chat_item.name = result.name
+  
+                  data[i] = chat_item
+                }
+              }
               this.chatList = data
+              
+              this.makeScrollDown() // Scroll Down in ChatBox
+              console.log("Chat List => ", this.chatList)
             })
           }
         })
@@ -115,15 +141,37 @@ export class ChatComponent implements OnInit {
     return data
   }
 
+  async getUserImageInfoByID(user_id){
+    const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
+
+    const data = await this.http.post('http://localhost:3000/api/v1/user/get', '_id=' + user_id, {
+      headers: headers
+    }).toPromise()
+
+    return data
+  }
+
   onClickChannel(channel_id){
     const headers = new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded');
     this.selected_channel_id = channel_id
 
     this.http.post('http://localhost:3000/api/v1/chat/history', "_id=" + this.selected_channel_id, {
       headers: headers
-    }).subscribe((data : any) => {
-      // console.log("Chat Histories => ", data)
+    }).subscribe(async (data : any) => {
+      for (var i =0; i < data.length ; i++){
+        var chat_item = data[i]
+
+        if (chat_item.from_id !== sessionStorage.getItem('_id')){
+          var result : any = await this.getUserImageInfoByID(chat_item.from_id) 
+          chat_item.avator_url = result.avator_url
+          chat_item.name = result.name
+
+          data[i] = chat_item
+        }
+      }
       this.chatList = data
+
+      this.makeScrollDown() // Scroll Down in ChatBox
     })
   }
 
@@ -140,19 +188,43 @@ export class ChatComponent implements OnInit {
     this.message = ""
     this.http.post('http://localhost:3000/api/v1/chat/history', "_id=" + this.selected_channel_id, {
       headers: headers
-    }).subscribe((data : any) => {
-      console.log(data)
+    }).subscribe(async(data : any) => {
+      for (var i =0; i < data.length ; i++){
+        var chat_item = data[i]
+
+        if (chat_item.from_id !== sessionStorage.getItem('_id')){
+          var result : any = await this.getUserImageInfoByID(chat_item.from_id) 
+          chat_item.avator_url = result.avator_url
+          chat_item.name = result.name
+
+          data[i] = chat_item
+        }
+      }
       this.chatList = data
+
+      this.makeScrollDown() // Scroll Down in ChatBox
+      console.log("Chat List => ", this.chatList)
     })
   }
 
   initIOConnection(){
     this.socketService.initSocket()
-    this.ioConnection = this.socketService.onMessage().subscribe((data : any) => {
-      console.log("Recive Data => ", data)
-      this.chatList.push(JSON.parse(data))
+    this.ioConnection = this.socketService.onMessage().subscribe(async(data : any) => {
+      var ggTeam = JSON.parse(data)
+      var result : any = await this.getUserImageInfoByID(ggTeam.from_id) 
+      ggTeam.avator_url = result.avator_url
+      ggTeam.name = result.name
+      console.log("Recive Data => ", ggTeam)
+      this.chatList.push(ggTeam)
+      this.makeScrollDown() // Scroll Down in ChatBox
     })
+  }
 
+  makeScrollDown(){
+    setTimeout(function(){ 
+      // $('.card-body').scrollTop($('.card-body')[0].scrollHeight+150);
+      $(".card-body").animate({ scrollTop: $('.card-body').height() * 2}, 1000);
+    }, 200);
   }
 
 }
