@@ -59,6 +59,7 @@ export class MomentPipe implements PipeTransform {
     LayoutModule,
     NavibarModule
   ],
+  exports: [],
   providers: [SocketService],
   bootstrap: [AppComponent]
 })
